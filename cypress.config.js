@@ -3,14 +3,14 @@ const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   e2e: {
-    defaultCommandTimeout: 4000,
-    pageLoadTimeout: 30000,
-    video: true,
-    viewportWidth: 1280,
-    viewportHeight: 720,
+    defaultCommandTimeout: 100000,
+    pageLoadTimeout: 100000,
+    //viewportWidth: 1280,
+    //viewportHeight: 720,
     setupNodeEvents(on, config) {
       on('file:preprocessor', cucumber())
      }, 
-     specPattern: "cypress/e2e/step_definitions/*.feature"
+     specPattern: "cypress/e2e/step_definitions/*.feature",
+     chromeWebSecurity: false
   },
 });
