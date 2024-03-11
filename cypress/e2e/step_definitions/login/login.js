@@ -12,23 +12,13 @@ Given(/^que o cliente realizou o login$/, () => {
 });
 
 When(/^inseriu CPF e senha$/, () => {
-    cy.xpath('/html/body').type('739.703.398-98')
-    cy.xpath('/html/body').type('@Sabesp4Win')
-    cy.get('[style="width: 304px; height: 78px;"] > div > iframe').click()
-    cy.get('iframe')
-      .first()
-      .its('0.contentDocument.body')
-      .should('not.be.undefined')
-      .and('not.be.empty')
-      .then(cy.wrap)
-      .find('#recaptcha-anchor')
-      .should('be.visible')
-      .click();
+    cy.xpath('//*[@id="login_input_cpf"]').type('73970339898')
+    cy.xpath('//*[@id="senha"]').type('@Sabesp4Win')
+    cy.get('#login-component_logar').click({force:true})
+    cy.xpath('//*[@id="fechaPop"]/span[1]/mat-icon').click({force:true})
 });
 
 Then(/^O sistema deverá direcionar para home logada$/, () => {
-  cy.get('#login-component_logar').click({force:true})
-  cy.xpath('//*[@id="fechaPop"]/span[1]/mat-icon').click({force:true})
   cy.get('#selecao-endereco').click({force:true})
   cy.get('h1').should('contain', 'Agência Virtual', {force:true})
   cy.get('#campo-selecao').click({force:true})
